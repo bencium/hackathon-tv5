@@ -5,6 +5,7 @@ export interface Genre {
   name: string;
   color: string;
   src: string;
+  tmdbId: number;
   hoverTime: number;
   hoverCount: number;
   clickOrder: number | null;
@@ -25,54 +26,62 @@ export interface DiscoveryMetrics {
   profileComplete: boolean;
 }
 
-// 8 genre configuration with Unsplash images
+// 8 genre configuration with Unsplash images and TMDB genre IDs
 export const GENRES: Omit<Genre, 'hoverTime' | 'hoverCount' | 'clickOrder'>[] = [
   {
     id: 'romance',
     name: 'Romance',
     color: '#FF6B6B',
+    tmdbId: 10749,
     src: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=225&fit=crop'
   },
   {
     id: 'thriller',
     name: 'Thriller',
     color: '#4ECDC4',
+    tmdbId: 53,
     src: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=225&fit=crop'
   },
   {
     id: 'comedy',
     name: 'Comedy',
     color: '#FFE66D',
+    tmdbId: 35,
     src: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&h=225&fit=crop'
   },
   {
     id: 'scifi',
     name: 'Sci-Fi',
     color: '#A855F7',
+    tmdbId: 878,
     src: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=400&h=225&fit=crop'
   },
   {
     id: 'drama',
     name: 'Drama',
     color: '#F97316',
+    tmdbId: 18,
     src: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&h=225&fit=crop'
   },
   {
     id: 'action',
     name: 'Action',
     color: '#EF4444',
+    tmdbId: 28,
     src: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=225&fit=crop'
   },
   {
     id: 'horror',
     name: 'Horror',
     color: '#6B7280',
+    tmdbId: 27,
     src: 'https://images.unsplash.com/photo-1626544827763-d516dce335e2?w=400&h=225&fit=crop'
   },
   {
     id: 'documentary',
     name: 'Documentary',
     color: '#10B981',
+    tmdbId: 99,
     src: 'https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=400&h=225&fit=crop'
   },
 ];
@@ -117,6 +126,7 @@ export const useDiscoveryStore = create<DiscoveryStore>((set, get) => ({
     GENRES.forEach(g => {
       genresMap[g.id] = {
         ...g,
+        tmdbId: g.tmdbId,
         hoverTime: 0,
         hoverCount: 0,
         clickOrder: null,

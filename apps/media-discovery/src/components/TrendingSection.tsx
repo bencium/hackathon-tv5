@@ -4,17 +4,24 @@ import { useQuery } from '@tanstack/react-query';
 import { MediaCard } from './MediaCard';
 import type { MediaContent } from '@/types/media';
 
-async function fetchTrending(): Promise<MediaContent[]> {
-  const response = await fetch('/api/discover?category=trending&type=all');
-  if (!response.ok) throw new Error('Failed to fetch trending');
+interface TrendingSectionProps {
+  genreIds?: number[];
+}
+
+async function fetchContent(genreIds?: number[]): Promise<MediaContent[]> {
+  const url = genreIds?.length
+    ? `/api/discover?category=discover&type=all&genres=${genreIds.join(',')}`
+    : '/api/discover?category=trending&type=all';
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('Failed to fetch content');
   const data = await response.json();
   return data.results;
 }
 
-export function TrendingSection() {
+export function TrendingSection({ genreIds }: TrendingSectionProps) {
   const { data: content, isLoading, error } = useQuery({
-    queryKey: ['trending'],
-    queryFn: fetchTrending,
+    queryKey: ['trending', genreIds],
+    queryFn: () => fetchContent(genreIds),
   });
 
   if (isLoading) {

@@ -108,6 +108,10 @@ export default function HomePage() {
   const primaryGenres = topGenres.slice(0, 2);
   const secondaryGenres = topGenres.slice(2, 4);
 
+  // Extract TMDB IDs for API filtering
+  const primaryGenreIds = primaryGenres.map(g => g.tmdbId).filter(Boolean);
+  const secondaryGenreIds = secondaryGenres.map(g => g.tmdbId).filter(Boolean);
+
   // If profile is complete, show the main app
   if (profileComplete) {
     return (
@@ -161,7 +165,7 @@ export default function HomePage() {
           </h2>
           <p className="text-text-secondary mb-6">Curated based on your taste profile</p>
           <Suspense fallback={<ContentSkeleton />}>
-            <TrendingSection />
+            <TrendingSection genreIds={primaryGenreIds} />
           </Suspense>
         </section>
 
@@ -172,7 +176,7 @@ export default function HomePage() {
             Because you like {secondaryGenres.map(g => g.name).join(' and ')}
           </p>
           <Suspense fallback={<ContentSkeleton />}>
-            <RecommendationsSection />
+            <RecommendationsSection genreIds={secondaryGenreIds} />
           </Suspense>
         </section>
 
