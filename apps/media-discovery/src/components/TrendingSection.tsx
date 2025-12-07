@@ -23,7 +23,7 @@ export function TrendingSection() {
         {Array.from({ length: 12 }).map((_, i) => (
           <div
             key={i}
-            className="aspect-[2/3] bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"
+            className="aspect-[2/3] bg-bg-elevated rounded-lg animate-pulse"
           />
         ))}
       </div>
@@ -32,7 +32,7 @@ export function TrendingSection() {
 
   if (error || !content) {
     return (
-      <div className="text-center py-8 text-gray-500">
+      <div className="text-center py-8 text-text-secondary">
         Failed to load trending content
       </div>
     );
@@ -40,8 +40,12 @@ export function TrendingSection() {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-      {content.slice(0, 12).map((item) => (
-        <MediaCard key={`${item.mediaType}-${item.id}`} content={item} />
+      {content.slice(0, 12).map((item, index) => (
+        <MediaCard
+          key={`${item.mediaType}-${item.id}`}
+          content={item}
+          index={index}
+        />
       ))}
     </div>
   );

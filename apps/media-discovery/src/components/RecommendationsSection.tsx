@@ -23,7 +23,7 @@ export function RecommendationsSection() {
         {Array.from({ length: 6 }).map((_, i) => (
           <div
             key={i}
-            className="aspect-[2/3] bg-gray-200 dark:bg-gray-800 rounded-lg animate-pulse"
+            className="aspect-[2/3] bg-bg-elevated rounded-lg animate-pulse"
           />
         ))}
       </div>
@@ -32,7 +32,7 @@ export function RecommendationsSection() {
 
   if (error || !recommendations) {
     return (
-      <div className="text-center py-8 text-gray-500">
+      <div className="text-center py-8 text-text-secondary">
         Failed to load recommendations
       </div>
     );
@@ -41,11 +41,12 @@ export function RecommendationsSection() {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        {recommendations.slice(0, 12).map((rec) => (
+        {recommendations.slice(0, 12).map((rec, index) => (
           <MediaCard
             key={`${rec.content.mediaType}-${rec.content.id}`}
             content={rec.content}
             reason={rec.reasons[0]}
+            index={index}
           />
         ))}
       </div>

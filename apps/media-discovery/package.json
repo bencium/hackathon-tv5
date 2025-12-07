@@ -26,7 +26,8 @@
     "ruvector": "^0.1.31",
     "tailwind-merge": "^2.5.0",
     "tmdb-ts": "^2.0.3",
-    "zod": "^3.23.0"
+    "zod": "^3.23.0",
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
