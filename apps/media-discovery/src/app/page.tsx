@@ -284,12 +284,6 @@ export default function HomePage() {
                     alt={genre.name}
                     className="w-full h-full object-cover"
                   />
-                  <div
-                    className="genre-label-hover absolute bottom-0 left-0 right-0 p-2 bg-black/80 text-xs font-medium uppercase tracking-wide"
-                    style={{ borderLeft: `3px solid ${genre.color}` }}
-                  >
-                    {genre.name}
-                  </div>
                   {isClicked && (
                     <div
                       className="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded text-xs font-bold animate-badge-pop"

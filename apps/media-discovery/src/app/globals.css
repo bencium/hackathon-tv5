@@ -256,18 +256,6 @@ h1, h2, h3, h4, h5, h6, .headline-hero, .headline-h1, .headline-h2 {
   transform: scale(1.05);
 }
 
-/* Genre label slide-up on hover */
-.genre-label-hover {
-  opacity: 0;
-  transform: translateY(100%);
-  transition: opacity 200ms ease-out, transform 200ms ease-out;
-}
-
-.card-hover:hover .genre-label-hover {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* ========================================
    BUTTON STYLES
    ======================================== */
