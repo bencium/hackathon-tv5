@@ -268,7 +268,7 @@ export default function HomePage() {
               return (
                 <div
                   key={genre.id}
-                  className="card-hover relative aspect-video overflow-hidden cursor-pointer rounded-lg"
+                  className="card-hover relative aspect-[9/16] overflow-hidden cursor-pointer rounded-lg"
                   style={{
                     borderWidth: '2px',
                     borderStyle: 'solid',
@@ -297,15 +297,13 @@ export default function HomePage() {
             })}
           </div>
 
-          {/* Continue Button - Goes directly to main app */}
-          {showContinueButton && (
-            <button
-              className="btn-primary mx-auto block max-w-[300px] w-full rounded animate-button-reveal"
-              onClick={completeProfile}
-            >
-              See My Recommendations
-            </button>
-          )}
+          {/* Skip / Continue Button - Always visible, text changes when profile ready */}
+          <button
+            className="btn-primary mx-auto block max-w-[300px] w-full rounded"
+            onClick={completeProfile}
+          >
+            {showContinueButton ? 'See My Recommendations' : 'Skip'}
+          </button>
         </div>
       </section>
 
