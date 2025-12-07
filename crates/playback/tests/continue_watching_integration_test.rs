@@ -51,7 +51,8 @@ async fn setup_test_db() -> sqlx::PgPool {
 }
 
 async fn cleanup_test_data(pool: &sqlx::PgPool, user_id: Uuid) {
-    sqlx::query!("DELETE FROM playback_progress WHERE user_id = $1", user_id)
+    sqlx::query("DELETE FROM playback_progress WHERE user_id = $1")
+        .bind(user_id)
         .execute(pool)
         .await
         .ok();
@@ -324,10 +325,10 @@ async fn test_cleanup_stale_progress() {
     service.update_progress(user_id, request).await.unwrap();
 
     // Manually update timestamp to simulate old record
-    sqlx::query!(
-        "UPDATE playback_progress SET updated_at = NOW() - INTERVAL '31 days' WHERE user_id = $1",
-        user_id
+    sqlx::query(
+        "UPDATE playback_progress SET updated_at = NOW() - INTERVAL '31 days' WHERE user_id = $1"
     )
+    .bind(user_id)
     .execute(&pool)
     .await
     .unwrap();

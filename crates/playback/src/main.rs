@@ -10,14 +10,14 @@ mod progress;
 mod session;
 mod watch_history;
 
-use actix_web::{web, App, HttpResponse, HttpServer, Responder};
+use actix_web::{web, App, HttpResponse, HttpServer};
 use continue_watching::{
     ContinueWatchingError, ContinueWatchingService, HttpContentMetadataProvider,
     ProgressUpdateRequest, SyncServiceClient,
 };
 use serde::Deserialize;
 use session::{
-    CreateSessionRequest, CreateSessionResponse, PlaybackSession, SessionError, SessionManager,
+    CreateSessionRequest, SessionError, SessionManager,
     UpdatePositionRequest,
 };
 use std::sync::Arc;

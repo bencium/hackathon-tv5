@@ -79,12 +79,3 @@ CREATE TRIGGER trigger_playback_sessions_updated_at
     BEFORE UPDATE ON playback_sessions
     FOR EACH ROW
     EXECUTE FUNCTION update_playback_sessions_updated_at();
-
--- Down migration
--- DROP TRIGGER IF EXISTS trigger_playback_sessions_updated_at ON playback_sessions;
--- DROP TRIGGER IF EXISTS trigger_content_updated_at ON content;
--- DROP FUNCTION IF EXISTS update_playback_sessions_updated_at();
--- DROP FUNCTION IF EXISTS update_content_updated_at();
--- DROP TABLE IF EXISTS playback_sessions;
--- DROP TABLE IF EXISTS search_history;
--- DROP TABLE IF EXISTS content;

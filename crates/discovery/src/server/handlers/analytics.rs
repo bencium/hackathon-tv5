@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tracing::{error, info};
 
-use crate::analytics::{AnalyticsDashboard, SearchAnalytics};
+use crate::analytics::SearchAnalytics;
 
 /// Query parameters for analytics endpoint
 #[derive(Debug, Deserialize)]

@@ -170,35 +170,3 @@ WHERE e.status = 'running'
 GROUP BY e.id, e.name, v.id, v.name, v.weight;
 
 COMMENT ON VIEW variant_performance IS 'Real-time variant performance metrics';
-
--- ============================================================================
--- Sample Data (Optional - for testing)
--- ============================================================================
-
--- Example: Create a sample experiment
--- Uncomment to insert test data
-
-/*
-INSERT INTO experiments (name, description, status, traffic_allocation)
-VALUES ('sample_lora_boost', 'Test LoRA boost factor', 'draft', 1.0)
-RETURNING id;
-
--- Assuming experiment_id is returned as '123e4567-e89b-12d3-a456-426614174000'
-INSERT INTO experiment_variants (experiment_id, name, weight, config)
-VALUES
-    ('123e4567-e89b-12d3-a456-426614174000', 'control', 0.5, '{"lora_boost": 0.3}'::jsonb),
-    ('123e4567-e89b-12d3-a456-426614174000', 'treatment', 0.5, '{"lora_boost": 0.5}'::jsonb);
-*/
-
--- ============================================================================
--- Migration Complete
--- ============================================================================
-
--- Verify tables were created
-SELECT
-    table_name,
-    table_type
-FROM information_schema.tables
-WHERE table_schema = 'public'
-    AND table_name LIKE 'experiment%'
-ORDER BY table_name;

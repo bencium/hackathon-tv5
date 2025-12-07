@@ -83,10 +83,3 @@ CREATE TRIGGER trigger_update_playback_progress_calculated_fields
     BEFORE INSERT OR UPDATE ON playback_progress
     FOR EACH ROW
     EXECUTE FUNCTION update_playback_progress_calculated_fields();
-
--- Down migration
--- DROP TRIGGER IF EXISTS trigger_update_playback_progress_calculated_fields ON playback_progress;
--- DROP TRIGGER IF EXISTS trigger_update_playback_progress_timestamp ON playback_progress;
--- DROP FUNCTION IF EXISTS update_playback_progress_calculated_fields();
--- DROP FUNCTION IF EXISTS update_playback_progress_timestamp();
--- DROP TABLE IF EXISTS playback_progress;

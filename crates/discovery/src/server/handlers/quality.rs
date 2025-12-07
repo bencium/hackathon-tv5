@@ -1,12 +1,11 @@
 use actix_web::{web, HttpResponse, Responder};
 use serde::{Deserialize, Serialize};
-use std::sync::Arc;
 use tracing::{error, info};
 
 use media_gateway_ingestion::normalizer::CanonicalContent;
 use media_gateway_ingestion::{
-    generate_quality_report, ContentRepository, LowQualityContentItem, PostgresContentRepository,
-    QualityScorer, QualityWeights,
+    ContentRepository, PostgresContentRepository,
+    QualityScorer,
 };
 
 /// Query parameters for quality report endpoint

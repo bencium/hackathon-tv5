@@ -201,7 +201,7 @@ impl RankingConfigStore {
 
         // Increment version
         let version: u32 = conn
-            .incr(CONFIG_VERSION_KEY, 1)
+            .incr::<_, _, u32>(CONFIG_VERSION_KEY, 1)
             .await
             .context("Failed to increment config version")?;
 
@@ -213,13 +213,13 @@ impl RankingConfigStore {
         let config_json = serde_json::to_string(&versioned_config)
             .context("Failed to serialize ranking config")?;
 
-        conn.set(DEFAULT_CONFIG_KEY, &config_json)
+        conn.set::<_, _, ()>(DEFAULT_CONFIG_KEY, &config_json)
             .await
             .context("Failed to set default ranking config in Redis")?;
 
         // Store historical version
         let history_key = format!("ranking:config:history:{}", version);
-        conn.set_ex(&history_key, &config_json, 30 * 24 * 3600)
+        conn.set_ex::<_, _, ()>(&history_key, &config_json, 30 * 24 * 3600)
             .await
             .context("Failed to store ranking config history")?;
 
@@ -311,7 +311,7 @@ impl RankingConfigStore {
         let config_json = serde_json::to_string(&named_config)
             .context("Failed to serialize named ranking config")?;
 
-        conn.set(&key, &config_json)
+        conn.set::<_, _, ()>(&key, &config_json)
             .await
             .context("Failed to set named ranking config in Redis")?;
 
@@ -384,7 +384,7 @@ impl RankingConfigStore {
 
         let key = format!("{}:{}", NAMED_CONFIG_PREFIX, name);
         let deleted: u64 = conn
-            .del(&key)
+            .del::<_, u64>(&key)
             .await
             .context("Failed to delete named ranking config")?;
 

@@ -299,7 +299,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_verify_email_success() {
-        let redis = setup_test_redis();
+        let redis = setup_test_redis().await;
         let email_config = EmailConfig::default();
         let provider = Arc::new(ConsoleProvider::new(
             email_config.base_url.clone(),
@@ -322,7 +322,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_verify_email_invalid_token() {
-        let redis = setup_test_redis();
+        let redis = setup_test_redis().await;
         let email_config = EmailConfig::default();
         let provider = Arc::new(ConsoleProvider::new(
             email_config.base_url.clone(),
@@ -337,13 +337,13 @@ mod tests {
 
     #[tokio::test]
     async fn test_resend_verification_rate_limit() {
-        let redis = setup_test_redis();
+        let redis = setup_test_redis().await;
         let email_config = EmailConfig::default();
         let provider = Arc::new(ConsoleProvider::new(
             email_config.base_url.clone(),
             email_config.from_name.clone(),
         ));
-        let email_manager = EmailManager::new(provider, redis, email_config).await;
+        let email_manager = EmailManager::new(provider, redis, email_config);
 
         // First send succeeds
         let result1 = email_manager

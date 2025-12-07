@@ -750,6 +750,7 @@ pub enum QueueError {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use async_trait::async_trait;
     use crate::sync::publisher::{MessagePayload, SyncMessage};
     use parking_lot::Mutex as ParkingMutex;
     use std::sync::Arc;

@@ -4,7 +4,7 @@
 -- This migration ensures backward compatibility with code expecting experiment_metrics table
 -- while the actual storage uses experiment_exposures and experiment_conversions.
 --
--- Dependencies: 015_ab_testing_schema.sql
+-- Dependencies: 011_ab_testing_schema.sql
 
 -- ============================================================================
 -- Compatibility View: experiment_metrics
@@ -85,10 +85,3 @@ END;
 $$ LANGUAGE plpgsql;
 
 COMMENT ON FUNCTION get_experiment_summary IS 'Get summary statistics for all variants in an experiment';
-
--- ============================================================================
--- Migration Complete
--- ============================================================================
-
--- Verify compatibility view
-SELECT 'experiment_metrics compatibility view created successfully' as status;

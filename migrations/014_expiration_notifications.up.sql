@@ -33,9 +33,3 @@ COMMENT ON COLUMN expiration_notifications.region IS 'Region where content is ex
 COMMENT ON COLUMN expiration_notifications.notification_window IS 'Window identifier (e.g., 7d, 3d, 1d)';
 COMMENT ON COLUMN expiration_notifications.expires_at IS 'When the content expires';
 COMMENT ON COLUMN expiration_notifications.notified_at IS 'When the notification was sent';
-
--- Down migration
--- DROP INDEX IF EXISTS idx_expiration_notifications_expires;
--- DROP INDEX IF EXISTS idx_expiration_notifications_notified;
--- DROP INDEX IF EXISTS idx_expiration_notifications_content;
--- DROP TABLE IF EXISTS expiration_notifications;

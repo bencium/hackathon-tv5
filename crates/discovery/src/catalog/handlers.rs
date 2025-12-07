@@ -1,5 +1,4 @@
 use actix_web::{web, HttpRequest, HttpResponse, Responder};
-use qdrant_client::Qdrant;
 use serde_json::json;
 use std::sync::Arc;
 use uuid::Uuid;

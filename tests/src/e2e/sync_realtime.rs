@@ -1,10 +1,5 @@
 //! End-to-end sync and realtime tests
-use crate::containers::TestContainers;
-use anyhow::Result;
-use chrono::Utc;
 use serde::{Deserialize, Serialize};
-use sqlx::Row;
-use testcontainers::clients::Cli;
 use uuid::Uuid;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]

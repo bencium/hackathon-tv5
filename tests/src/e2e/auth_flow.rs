@@ -1,15 +1,8 @@
 //! End-to-end authentication flow tests
-use crate::containers::TestContainers;
-use anyhow::Result;
 use base64::{engine::general_purpose::URL_SAFE_NO_PAD, Engine};
-use chrono::Utc;
 use rand::Rng;
-use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
-use sqlx::Row;
-use std::collections::HashMap;
-use testcontainers::clients::Cli;
 use uuid::Uuid;
 
 #[derive(Debug, Serialize, Deserialize)]

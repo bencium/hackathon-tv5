@@ -11,7 +11,7 @@
 
 use crate::{normalizer::CanonicalContent, IngestionError, Result};
 use qdrant_client::qdrant::{
-    vectors_config::Config, CreateCollection, Distance, PointStruct, UpsertPoints,
+    vectors_config::Config, CreateCollection, Distance, PointStruct, UpsertPointsBuilder,
     Value as QdrantValue, VectorParams, VectorsConfig,
 };
 use qdrant_client::Qdrant as QdrantClientImpl;
@@ -180,11 +180,10 @@ impl QdrantClient {
         let point = self.create_point_struct(id, vector, payload)?;
 
         self.client
-            .upsert_points(UpsertPoints {
-                collection_name: self.collection_name.clone(),
-                points: vec![point],
-                ..Default::default()
-            })
+            .upsert_points(UpsertPointsBuilder::new(
+                self.collection_name.clone(),
+                vec![point],
+            ))
             .await
             .map_err(|e| IngestionError::DatabaseError(format!("Failed to upsert point: {}", e)))?;
 
@@ -224,11 +223,10 @@ impl QdrantClient {
             .collect::<Result<Vec<_>>>()?;
 
         self.client
-            .upsert_points(UpsertPoints {
-                collection_name: self.collection_name.clone(),
-                points: point_structs.clone(),
-                ..Default::default()
-            })
+            .upsert_points(UpsertPointsBuilder::new(
+                self.collection_name.clone(),
+                point_structs.clone(),
+            ))
             .await
             .map_err(|e| IngestionError::DatabaseError(format!("Failed to upsert batch: {}", e)))?;
 

@@ -194,7 +194,7 @@ impl RedisCache {
 
         let mut conn = self.manager.clone();
 
-        conn.set_ex(key, json, ttl_sec)
+        conn.set_ex::<_, _, ()>(key, json, ttl_sec)
             .await
             .map_err(CacheError::Connection)?;
 
@@ -213,7 +213,7 @@ impl RedisCache {
     pub async fn delete(&self, key: &str) -> Result<u64, CacheError> {
         let mut conn = self.manager.clone();
 
-        let count: u64 = conn.del(key).await.map_err(CacheError::Connection)?;
+        let count: u64 = conn.del::<_, u64>(key).await.map_err(CacheError::Connection)?;
 
         debug!(key = %key, deleted = %count, "Cache delete");
         Ok(count)
@@ -239,7 +239,7 @@ impl RedisCache {
         }
 
         // Delete all matching keys
-        let count: u64 = conn.del(&keys).await.map_err(CacheError::Connection)?;
+        let count: u64 = conn.del::<_, u64>(&keys).await.map_err(CacheError::Connection)?;
 
         info!(pattern = %pattern, deleted = %count, "Deleted keys by pattern");
         Ok(count)
